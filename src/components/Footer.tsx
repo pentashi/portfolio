@@ -82,6 +82,27 @@ const Footer: React.FC = () => {
               </svg>
             </a>
           )}
+          {/* Email */}
+          {social.email && (
+            <a
+              href={`mailto:${social.email}`}
+              className="text-graphite-light hover:text-graphite transition-colors duration-200"
+              aria-label="Email"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="M2 7l10 6 10-6" />
+              </svg>
+            </a>
+          )}
           <span
             className="text-sm text-graphite-light"
             style={{

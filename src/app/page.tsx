@@ -3,9 +3,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from './components/HeroSection';
 import ProjectSpotlight from './components/ProjectSpotlight';
-import EssayGallery from './components/EssayGallery';
 import PeerSignal from './components/PeerSignal';
-import AppTour from '@/components/tour/AppTour';
 
 export default function HomePage() {
   return (
@@ -25,17 +23,11 @@ export default function HomePage() {
       {/* Project Spotlight — alternating 60/40 */}
       <ProjectSpotlight />
 
-      {/* Essay Gallery — rotated card grid */}
-      <EssayGallery />
-
       {/* Peer Signal — testimonials + GitHub heatmap */}
       <PeerSignal />
 
       {/* Footer */}
       <Footer />
-
-      {/* Guided "what can I change?" tour for people forking the template */}
-      <AppTour />
     </main>
   );
 }
