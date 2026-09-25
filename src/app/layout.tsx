@@ -2,7 +2,7 @@ import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import '../styles/tailwind.css';
 import { JetBrains_Mono } from 'next/font/google';
-import { site } from '@/config/portfolio';
+import { site, person } from '@/config/portfolio';
 
 // Applies the visitor's saved theme (if any) before first paint, so there's no
 // flash. There is no forced default — the base :root look is used until a theme
@@ -16,10 +16,28 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: site.title,
   description: site.description,
+  applicationName: site.brand,
+  authors: [{ name: `${person.firstName} ${person.lastName}` }],
+  alternates: { canonical: '/' },
   icons: {
-    icon: [{ url: site.logo, type: 'image/x-icon' }],
+    icon: [{ url: site.logo, type: 'image/png' }],
+  },
+  openGraph: {
+    type: 'website',
+    url: site.url,
+    siteName: site.title,
+    title: site.title,
+    description: site.description,
+    images: [{ url: site.ogImage, width: 1200, height: 630, alt: site.title }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: site.title,
+    description: site.description,
+    images: [site.ogImage],
   },
 };
 

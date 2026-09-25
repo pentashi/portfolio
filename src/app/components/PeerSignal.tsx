@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import AppImage from '@/components/ui/AppImage';
 import { getGithubContributions, GithubStats } from './getGithubContributions';
-import { testimonials, social } from '@/config/portfolio';
+import { testimonials, social, peerMeta } from '@/config/portfolio';
 
 // Maps a raw contribution count to a 0–4 level for colour bucketing
 export const getContribLevel = (count: number): number => {
@@ -113,7 +113,7 @@ const PeerSignal: React.FC = () => {
               letterSpacing: '0.25em',
             }}
           >
-            Peer Signal
+            {peerMeta.eyebrow}
           </span>
           <h2
             className="font-serif font-light mt-3 leading-tight"
@@ -124,165 +124,167 @@ const PeerSignal: React.FC = () => {
               lineHeight: 1.1,
             }}
           >
-            What colleagues say
+            {peerMeta.heading}
           </h2>
         </div>
 
         {/* Testimonials — asymmetric layout */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-20">
-          {/* Large card */}
-          <div className="md:col-span-7">
-            <div
-              className="peer-card h-full"
-              style={{ background: 'var(--dark)', borderColor: 'rgba(255,255,255,0.05)' }}
-            >
+        {testimonials.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-20">
+            {/* Large card */}
+            <div className="md:col-span-7">
               <div
-                className="font-serif text-5xl mb-4 select-none"
-                style={{
-                  fontFamily: 'Fraunces, serif',
-                  color: 'var(--clay)',
-                  opacity: 0.4,
-                  lineHeight: 1,
-                }}
+                className="peer-card h-full"
+                style={{ background: 'var(--dark)', borderColor: 'rgba(255,255,255,0.05)' }}
               >
-                &ldquo;
-              </div>
-              <p
-                className="font-serif italic leading-relaxed mb-8"
-                style={{
-                  fontFamily: 'Fraunces, serif',
-                  color: 'rgba(245,240,235,0.9)',
-                  fontSize: '20px',
-                  lineHeight: 1.6,
-                }}
-              >
-                {testimonials[0].quote}
-              </p>
-              <div className="flex items-center gap-4">
-                {testimonials[0].avatar && (
-                  <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-white ring-opacity-10">
-                    <AppImage
-                      src={testimonials[0].avatar}
-                      alt={`${testimonials[0].name}, ${testimonials[0].title} at ${testimonials[0].company}`}
-                      width={44}
-                      height={44}
-                      className="w-full h-full object-cover"
-                      onClick={() => window.open(testimonials[0].linkedin, '_blank')}
-                    />
-                  </div>
-                )}
-                <div>
-                  <p
-                    className="font-mono text-sm font-medium"
-                    style={{
-                      fontFamily: 'JetBrains Mono, monospace',
-                      color: 'rgba(245,240,235,0.9)',
-                      fontSize: '13px',
-                    }}
-                  >
-                    {testimonials[0].name}
-                  </p>
-                  <p
-                    className="text-xs mt-0.5"
-                    style={{
-                      fontFamily: 'DM Sans, sans-serif',
-                      color: 'rgba(245,240,235,0.45)',
-                      fontSize: '12px',
-                    }}
-                  >
-                    {testimonials[0].title} · {testimonials[0].company}
-                  </p>
-                </div>
-                <div className="ml-auto">
-                  <span
-                    className="tag-pill"
-                    style={{
-                      background: 'rgba(110,140,160,0.15)',
-                      color: 'var(--blue-light)',
-                      borderColor: 'rgba(110,140,160,0.2)',
-                    }}
-                  >
-                    {testimonials[0].context}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Two small cards */}
-          <div className="md:col-span-5 flex flex-col gap-6">
-            {testimonials.slice(1).map((t, i) => (
-              <div
-                key={i}
-                className="peer-card flex-1"
-                style={{
-                  transitionDelay: `${(i + 1) * 100}ms`,
-                  opacity: visible ? 1 : 0,
-                  transform: visible ? 'translateY(0)' : 'translateY(20px)',
-                  transition: `all 0.6s ease ${(i + 1) * 100}ms`,
-                }}
-              >
-                <p
-                  className="text-sm leading-relaxed mb-6"
+                <div
+                  className="font-serif text-5xl mb-4 select-none"
                   style={{
-                    fontFamily: 'DM Sans, sans-serif',
-                    color: 'var(--graphite)',
-                    fontSize: '14px',
-                    lineHeight: 1.75,
+                    fontFamily: 'Fraunces, serif',
+                    color: 'var(--clay)',
+                    opacity: 0.4,
+                    lineHeight: 1,
                   }}
                 >
-                  &ldquo;{t.quote}&rdquo;
+                  &ldquo;
+                </div>
+                <p
+                  className="font-serif italic leading-relaxed mb-8"
+                  style={{
+                    fontFamily: 'Fraunces, serif',
+                    color: 'rgba(245,240,235,0.9)',
+                    fontSize: '20px',
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {testimonials[0].quote}
                 </p>
-                <div className="flex items-center gap-3">
-                  {t.avatar && (
-                    <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+                <div className="flex items-center gap-4">
+                  {testimonials[0].avatar && (
+                    <div className="w-11 h-11 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-white ring-opacity-10">
                       <AppImage
-                        src={t.avatar}
-                        alt={`${t.name}, ${t.title} at ${t.company}`}
-                        onClick={() => window.open(t.linkedin, '_blank')}
-                        width={36}
-                        height={36}
+                        src={testimonials[0].avatar}
+                        alt={`${testimonials[0].name}, ${testimonials[0].title} at ${testimonials[0].company}`}
+                        width={44}
+                        height={44}
                         className="w-full h-full object-cover"
+                        onClick={() => window.open(testimonials[0].linkedin, '_blank')}
                       />
                     </div>
                   )}
                   <div>
                     <p
-                      className="font-mono text-xs font-medium"
+                      className="font-mono text-sm font-medium"
                       style={{
                         fontFamily: 'JetBrains Mono, monospace',
-                        color: 'var(--graphite)',
+                        color: 'rgba(245,240,235,0.9)',
+                        fontSize: '13px',
+                      }}
+                    >
+                      {testimonials[0].name}
+                    </p>
+                    <p
+                      className="text-xs mt-0.5"
+                      style={{
+                        fontFamily: 'DM Sans, sans-serif',
+                        color: 'rgba(245,240,235,0.45)',
                         fontSize: '12px',
                       }}
                     >
-                      {t.name}
-                    </p>
-                    <p
-                      className="text-xs"
-                      style={{
-                        fontFamily: 'DM Sans, sans-serif',
-                        color: 'var(--graphite-light)',
-                        fontSize: '11px',
-                      }}
-                    >
-                      {t.title} · {t.company}
+                      {testimonials[0].title} · {testimonials[0].company}
                     </p>
                   </div>
-                  <span
-                    className="ml-auto font-mono text-xs"
-                    style={{
-                      fontFamily: 'JetBrains Mono, monospace',
-                      color: 'var(--blue)',
-                      fontSize: '10px',
-                    }}
-                  >
-                    {t.context}
-                  </span>
+                  <div className="ml-auto">
+                    <span
+                      className="tag-pill"
+                      style={{
+                        background: 'rgba(110,140,160,0.15)',
+                        color: 'var(--blue-light)',
+                        borderColor: 'rgba(110,140,160,0.2)',
+                      }}
+                    >
+                      {testimonials[0].context}
+                    </span>
+                  </div>
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Two small cards */}
+            <div className="md:col-span-5 flex flex-col gap-6">
+              {testimonials.slice(1).map((t, i) => (
+                <div
+                  key={i}
+                  className="peer-card flex-1"
+                  style={{
+                    transitionDelay: `${(i + 1) * 100}ms`,
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? 'translateY(0)' : 'translateY(20px)',
+                    transition: `all 0.6s ease ${(i + 1) * 100}ms`,
+                  }}
+                >
+                  <p
+                    className="text-sm leading-relaxed mb-6"
+                    style={{
+                      fontFamily: 'DM Sans, sans-serif',
+                      color: 'var(--graphite)',
+                      fontSize: '14px',
+                      lineHeight: 1.75,
+                    }}
+                  >
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-3">
+                    {t.avatar && (
+                      <div className="w-9 h-9 rounded-full overflow-hidden flex-shrink-0">
+                        <AppImage
+                          src={t.avatar}
+                          alt={`${t.name}, ${t.title} at ${t.company}`}
+                          onClick={() => window.open(t.linkedin, '_blank')}
+                          width={36}
+                          height={36}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <div>
+                      <p
+                        className="font-mono text-xs font-medium"
+                        style={{
+                          fontFamily: 'JetBrains Mono, monospace',
+                          color: 'var(--graphite)',
+                          fontSize: '12px',
+                        }}
+                      >
+                        {t.name}
+                      </p>
+                      <p
+                        className="text-xs"
+                        style={{
+                          fontFamily: 'DM Sans, sans-serif',
+                          color: 'var(--graphite-light)',
+                          fontSize: '11px',
+                        }}
+                      >
+                        {t.title} · {t.company}
+                      </p>
+                    </div>
+                    <span
+                      className="ml-auto font-mono text-xs"
+                      style={{
+                        fontFamily: 'JetBrains Mono, monospace',
+                        color: 'var(--blue)',
+                        fontSize: '10px',
+                      }}
+                    >
+                      {t.context}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* GitHub contribution heatmap */}
         <div

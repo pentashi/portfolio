@@ -5,22 +5,8 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
   distDir: process.env.DIST_DIR || '.next',
 
-  typescript: {
-    ignoreBuildErrors: true,
-  },
-
   images: {
     remotePatterns: imageHosts,
-  },
-
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/home',
-        permanent: false,
-      },
-    ];
   },
 
   turbopack: {},
